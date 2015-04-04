@@ -72,7 +72,7 @@ int main(void) {
     
     int i;
     
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     
     int listenfd = bindandlisten();
     // initialize allset and add listenfd to the
