@@ -328,6 +328,17 @@ static struct client *addclient(struct client *top, int fd, struct in_addr addr)
     p -> active = 0;
     p -> speak = 0;
     top = p;
+
+    struct client *iter = head;
+    while(iter){
+        char msg[1024];
+        sprintf(msg,  "\r\n**%s enters the arena**\r\n", p -> name);
+        if(write(iter -> fd , msg, strlen(msg)) == -1) {
+            perror("write");
+            exit(1);
+        }
+        iter = iter -> next;
+    }
     match(p);
 
     return top;
@@ -352,6 +363,16 @@ static struct client *removeclient(struct client *top, int fd) {
             }
         opp = (*p) -> opponent;
         }
+        struct client *iter = head;
+        while(iter){
+            char msg[1024];
+            sprintf(msg,  "\r\n**%s leaves**\r\n", (*p) -> name);
+            if(write(iter -> fd , msg, strlen(msg)) == -1) {
+               perror("write");
+             exit(1);
+            }
+        iter = iter -> next;
+    }
         struct client *t = (*p)->next;
         printf("Removing client %d %s\n", fd, inet_ntoa((*p)->ipaddr));
         free(*p);
