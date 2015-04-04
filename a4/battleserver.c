@@ -429,13 +429,6 @@ static void end_game_abnormally(struct client *p){
     match(p);
 }
 
-static void broadcast(struct client *top, char *s, int size) {
-    struct client *p;
-    for (p = top; p; p = p->next) {
-        write(p->fd, s, size);
-    }
-    /* should probably check write() return value and perhaps remove client */
-}
 /*
  Finds a match for a player waiting for an opponent.
  */
