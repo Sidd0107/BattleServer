@@ -18,7 +18,7 @@
 #include <arpa/inet.h>
 
 #ifndef PORT
-#define PORT 17147
+#define PORT x
 #endif
 
 struct client {
@@ -46,7 +46,6 @@ struct client {
 
 static struct client *addclient(struct client *top, int fd, struct in_addr addr);
 static struct client *removeclient(struct client *top, int fd);
-static void broadcast(struct client *top, char *s, int size);
 int handleclient(struct client *p, struct client *top);
 static void start_game(struct client *p1, struct client *p2);
 static void match(struct client *p);
@@ -139,7 +138,6 @@ int main(void) {
 
 int handleclient(struct client *p, struct client *top) {
     char buf[256];
-    char outbuf[512];
     int len = read(p->fd, buf, sizeof(buf) - 1);
     if (len > 0) {
         // If the player is in a game
