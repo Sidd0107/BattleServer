@@ -1,10 +1,5 @@
 /*
- * socket demonstrations:
- * This is the server side of an "internet domain" socket connection, for
- * communicating over the network.
- *
- * In this case we are willing to wait either for chatter from the client
- * _or_ for a new connection.
+ * This is a server side battleServer.
  */
 
 
